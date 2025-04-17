@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Audit Logs</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; color: #333; }
+    .header { display: flex; align-items: center; margin-bottom: 20px; }
+    .logo { height: 50px; margin-right: 20px; }
+    h2 { margin: 0; font-size: 18px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 8px; border: 1px solid #ccc; }
+    th { background: #f0f0f0; text-align: left; }
+    .summary { margin-top: 16px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="/static/images/logo.png" class="logo" alt="CarePlus Logo">
+    <h2>CarePlus Audit Log Report</h2>
+  </div>
+
+  <p><strong>Date Range:</strong> {{ start }} to {{ end }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Action</th>
+        <th>Description</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <td>{{ log.user.username }}</td>
+        <td>{{ log.action_type }}</td>
+        <td>{{ log.description }}</td>
+        <td>{{ log.timestamp }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p class="summary">Total Logs: {{ logs|length }}</p>
+</body>
+</html>
