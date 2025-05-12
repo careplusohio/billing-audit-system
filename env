@@ -1,0 +1,17 @@
+# ✅ Updated .env for billing-audit-system with PostgreSQL
+
+# Django environment settings
+SECRET_KEY=replace-this-with-a-secure-secret-key
+DEBUG=False
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+# Email (SMTP Gmail)
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_password_or_app_token
+
+# PostgreSQL connection settings
+POSTGRES_DB=careplus
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=strongpassword
+POSTGRES_HOST=localhost
+

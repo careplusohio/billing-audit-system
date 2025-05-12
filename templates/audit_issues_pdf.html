@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Audit Issues Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 5px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Audit Issues Report</h2>
+    <table>
+        <thead>
+            <tr>
+                <tr>
+                    <th className="p-2">
+                      <input
+                        type="checkbox"
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedIssues(issues.map(issue => issue.id));
+                          } else {
+                            setSelectedIssues([]);
+                          }
+                        }
+                        checked={selectedIssues.length === issues.length && issues.length > 0}
+                      />
+                    </th>
+                    <th className="p-2">Patient</th>
+                  
+                <th>Issue Type</th>
+                <th>Description</th>
+                <th>Flags</th>
+                <th>Status</th>
+                <th>Review Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for issue in issues %}
+            <tr>
+                <td>{{ issue.billing_record.patient }}</td>
+                <td>{{ issue.issue_type }}</td>
+                <td>{{ issue.description }}</td>
+                <td>{{ issue.flags }}</td>
+                <td>{{ issue.status }}</td>
+                <td>{{ issue.review_date|date:"Y-m-d" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

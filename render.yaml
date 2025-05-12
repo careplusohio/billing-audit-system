@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: careplus-backend
+    env: docker
+    repo: https://github.com/YOUR_USERNAME/careplus-audit-system
+    branch: main
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: backend.settings
+      - key: SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DEBUG
+        value: false
+
+  - type: web
+    name: careplus-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    repo: https://github.com/YOUR_USERNAME/careplus-audit-system
+    branch: main
+    plan: free
+    autoDeploy: true

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rhino Claims Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .cards {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: #e9eef1;
+            padding: 1rem;
+            flex: 1;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            margin: 0.5rem 0 0.25rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<form method="get" style="margin-bottom: 1rem;">
+    <label>
+        Start Date:
+        <input type="date" name="start_date" value="{{ filters.start_date }}">
+    </label>
+    <label>
+        End Date:
+        <input type="date" name="end_date" value="{{ filters.end_date }}">
+    </label>
+    <label>
+        Payer:
+        <input type="text" name="payer" placeholder="Search payer..." value="{{ filters.payer }}">
+    </label>
+    <button type="submit">🔍 Filter</button>
+    <a href="{% url 'rhino_dashboard' %}">Reset</a>
+</form>
+
+<body>
+    <h1>Rhino Claims Dashboard</h1>
+<div style="margin: 1rem 0;">
+    <a href="{% url 'export_rhino_pdf' %}" style="margin-right: 1rem;">🖨 Export PDF</a>
+    <a href="{% url 'export_rhino_csv' %}" style="margin-right: 1rem;">📄 Export CSV</a>
+    <a href="{% url 'export_rhino_zip' %}">📦 Export ZIP</a>
+</div>
+
+    <div class="cards">
+        <div class="card">
+            <div style="font-size: 24px;">📄</div>
+            <h2>Total Claims</h2>
+            <p>{{ total_claims }}</p>
+        </div>
+        <div style="margin: 1rem 0;">
+            <a href="{% url 'export_rhino_pdf' %}" style="margin-right: 1rem;">🖨 Export PDF</a>
+            <a href="{% url 'export_rhino_csv' %}" style="margin-right: 1rem;">📄 Export CSV</a>
+            <a href="{% url 'export_rhino_zip' %}">📦 Export ZIP</a>
+        </div>
+        
+        <div class="card">
+            <div style="font-size: 24px;">💰</div>
+            <h2>Total Billed</h2>
+            <p>${{ total_billed }}</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 24px;">✅</div>
+            <h2>Total Paid</h2>
+            <p>${{ total_paid }}</p>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Claim Status</th>
+                <th>Total Billed</th>
+                <th>Total Paid</th>
+                <th>Payer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient, status, billed, paid, payer in claims %}
+            <tr>
+                <td>{{ patient }}</td>
+                <td>{{ status }}</td>
+                <td>${{ billed }}</td>
+                <td>${{ paid }}</td>
+                <td>{{ payer }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No claims found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

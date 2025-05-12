@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: sans-serif; font-size: 13px; }
+    img { width: 100px; height: 100px; border-radius: 10px; object-fit: cover; }
+    .info { margin-top: 20px; }
+    .info p { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <h2>Patient Details</h2>
+  {% if patient.photo %}
+    <img src="{{ patient.photo.url }}" alt="Patient Photo" />
+  {% endif %}
+  <div class="info">
+    <p><strong>First Name:</strong> {{ patient.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ patient.last_name }}</p>
+    <p><strong>Gender:</strong> {{ patient.gender }}</p>
+    <p><strong>DOB:</strong> {{ patient.dob }}</p>
+    <p><strong>Insurance ID:</strong> {{ patient.insurance_id }}</p>
+    <p><strong>Payer:</strong> {{ patient.payer }}</p>
+  </div>
+</body>
+</html>

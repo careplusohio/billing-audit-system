@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
+        th { background-color: #eee; }
+    </style>
+</head>
+<body>
+    <h2>Rhino Claims Report</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>First</th>
+                <th>Last</th>
+                <th>Status</th>
+                <th>Total Billed</th>
+                <th>Total Paid</th>
+                <th>Payer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for first, last, status, billed, paid, payer in claims %}
+            <tr>
+                <td>{{ first }}</td>
+                <td>{{ last }}</td>
+                <td>{{ status }}</td>
+                <td>${{ billed }}</td>
+                <td>${{ paid }}</td>
+                <td>{{ payer }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

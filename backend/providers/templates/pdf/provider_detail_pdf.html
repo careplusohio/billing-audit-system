@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: sans-serif; font-size: 14px; margin: 30px; }
+    h2 { color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
+    th { background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h2>Provider Details</h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <td>{{ provider.provider_name }}</td>
+    </tr>
+    <tr>
+      <th>NPI</th>
+      <td>{{ provider.npi }}</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td>{{ provider.compliance_status }}</td>
+    </tr>
+    <tr>
+      <th>Certification</th>
+      <td>{{ provider.certification }}</td>
+    </tr>
+  </table>
+</body>
+</html>

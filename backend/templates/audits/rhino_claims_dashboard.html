@@ -1,0 +1,63 @@
+# /billing-audit-system/templates/audits/rhino_claims_dashboard.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rhino Claims Dashboard</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
+        th { background-color: #f2f2f2; }
+        .summary { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<h1>Rhino Claims Dashboard</h1>
+
+<div class="summary">
+    <strong>Total Claims:</strong> {{ total_claims }}<br>
+    <strong>Total Billed:</strong> ${{ total_billed }}<br>
+    <strong>Total Paid:</strong> ${{ total_paid }}<br>
+</div>
+
+<form method="get">
+    <label>Start Date:</label>
+    <input type="date" name="start_date" value="{{ start_date }}">
+    <label>End Date:</label>
+    <input type="date" name="end_date" value="{{ end_date }}">
+    <label>Payer:</label>
+    <input type="text" name="payer" value="{{ payer }}">
+    <button type="submit">Filter</button>
+</form>
+
+<br>
+
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>DOB</th>
+            <th>Total Billed</th>
+            <th>Total Paid</th>
+            <th>Payer</th>
+            <th>Claim Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for claim in claims %}
+        <tr>
+            <td>{{ claim.patient_first_name }}</td>
+            <td>{{ claim.patient_last_name }}</td>
+            <td>{{ claim.patient_dob }}</td>
+            <td>{{ claim.total_charges }}</td>
+            <td>{{ claim.paid_amount }}</td>
+            <td>{{ claim.payer }}</td>
+            <td>{{ claim.claim_status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
