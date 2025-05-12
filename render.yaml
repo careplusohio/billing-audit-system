@@ -2,26 +2,32 @@ services:
   - type: web
     name: careplus-backend
     env: docker
-    repo: https://github.com/YOUR_USERNAME/careplus-audit-system
+    repo: https://github.com/careplusohio/careplus-audit-system
     branch: main
     plan: free
     autoDeploy: true
+    buildCommand: docker build -t careplus-backend .
+    startCommand: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: backend.settings
       - key: SECRET_KEY
         sync: false
-      - key: DATABASE_URL
-        sync: false
       - key: DEBUG
         value: false
+      - key: DATABASE_URL
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
 
   - type: web
     name: careplus-frontend
     env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/build
-    repo: https://github.com/YOUR_USERNAME/careplus-audit-system
+    repo: https://github.com/careplusohio/careplus-audit-system
     branch: main
     plan: free
     autoDeploy: true
